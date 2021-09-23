@@ -22,6 +22,7 @@
     "typescript": "^3.3.3"
   },
   "dependencies": {
+    "@octokit/types": "^18.10.0",
     "@octokit/rest": "^18.10.0",
     "jsonwebtoken": "^8.5.1",
     "safe-marked": "^7.0.0",
