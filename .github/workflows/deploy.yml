@@ -1,0 +1,27 @@
+name: Upload To Azure
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "14.x"
+      - name: "run npm"
+        run: |
+          yarn install
+          yarn build
+          yarn test
+      - name: "minimize dependencies"
+        run: |
+          npm prune --production
+      - uses: Azure/functions-action@v1
+        with:
+          app-name: TypeScriptPlaygroundGistProxyAPI
+          publish-profile: ${{ secrets.SCM_CREDENTIALS }}
