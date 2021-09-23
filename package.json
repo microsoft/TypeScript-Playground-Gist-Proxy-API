@@ -24,7 +24,8 @@
   "dependencies": {
     "@octokit/rest": "^18.10.0",
     "jsonwebtoken": "^8.5.1",
-    "safe-marked": "^7.0.0"
+    "safe-marked": "^7.0.0",
+    "set-value": "4.0.1"
   },
   "prettier": {
     "printWidth": 140
