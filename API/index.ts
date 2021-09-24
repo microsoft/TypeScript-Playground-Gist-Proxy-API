@@ -1,9 +1,18 @@
 import { AzureFunction, Context, HttpRequest } from "@azure/functions";
 import { Octokit } from "@octokit/rest";
 import { createGitHubClient } from "./createGitHubClient";
-import type { Endpoints } from "@octokit/types/dist-types/generated/endpoints";
 
-export type GistFiles = Endpoints["GET /gists/{gist_id}"]["response"]["data"]["files"];
+export type GistFiles = {
+  [key: string]: {
+    filename?: string;
+    type?: string;
+    language?: string;
+    raw_url?: string;
+    size?: number;
+    truncated?: boolean;
+    content?: string;
+  };
+}
 
 export const run: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
   const api = createGitHubClient();
@@ -21,15 +30,15 @@ type StoryContent =
 
 type Success =
   | {
-      type: "code";
-      code: string;
-      params: string;
-    }
+    type: "code";
+    code: string;
+    params: string;
+  }
   | {
-      type: "story";
-      title: string;
-      files: Array<StoryContent>;
-    };
+    type: "story";
+    title: string;
+    files: Array<StoryContent>;
+  };
 
 type APIResponse = Success | { error: true; display: string };
 
@@ -121,13 +130,13 @@ export const contentToCodePlusCompilerSettings = (extension: string, contents: s
 
 const mdToHTML =
   (api: Octokit) =>
-  async (md: string): Promise<string | null> => {
-    const req = await api.markdown.render({ text: md });
-    if (req.status === 200) {
-      return req.data;
-    }
-    return null;
-  };
+    async (md: string): Promise<string | null> => {
+      const req = await api.markdown.render({ text: md });
+      if (req.status === 200) {
+        return req.data;
+      }
+      return null;
+    };
 
 type MDToHTML = (md: string) => Promise<string | null>;
 
