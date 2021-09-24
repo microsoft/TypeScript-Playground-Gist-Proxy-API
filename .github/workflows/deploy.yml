@@ -20,7 +20,7 @@ jobs:
           ls node_modules/@octokit
           ls node_modules/@octokit/types
           yarn tsc --version
-          yarn build
+          yarn tsc
           yarn test
       - uses: Azure/functions-action@v1
         with:
