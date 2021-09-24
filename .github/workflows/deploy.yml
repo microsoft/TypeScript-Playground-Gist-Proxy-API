@@ -16,6 +16,10 @@ jobs:
       - name: "Validation"
         run: |
           yarn install
+          ls node_modules/
+          ls node_modules/@octokit
+          ls node_modules/@octokit/types
+          yarn tsc --version
           yarn build
           yarn test
       - uses: Azure/functions-action@v1
