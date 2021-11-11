@@ -109,10 +109,10 @@ export const contentToCodePlusCompilerSettings = (extension: string, contents: s
     const preJSON = contents.replace(/\r\n/g, "\n").split("//// {")[1].split("}\n")[0];
     contents = contents.split("\n").slice(1).join("\n");
 
-    const code = "({" + preJSON + "})";
+    const code = "{" + preJSON + "}";
 
     try {
-      const obj = eval(code);
+      const obj = JSON.parse(code);
       compiler = obj.compiler;
     } catch (err) {
       return null;
