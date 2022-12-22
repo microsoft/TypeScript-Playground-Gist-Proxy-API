@@ -24,7 +24,7 @@
   "dependencies": {
     "@octokit/rest": "^18.10.0",
     "@octokit/types": "6.30.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "safe-marked": "^7.0.0",
     "set-value": "4.0.1"
   },
